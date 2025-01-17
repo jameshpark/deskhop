@@ -36,7 +36,7 @@
  *
  * */
 
-#define HOTKEY_TOGGLE HID_KEY_CAPS_LOCK
+#define HOTKEY_TOGGLE HID_KEY_TAB
 
 /**================================================== *
  * ==============  Mouse Speed Factor  ============== *

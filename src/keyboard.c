@@ -23,7 +23,7 @@
 
 hotkey_combo_t hotkeys[] = {
     /* Main keyboard switching hotkey */
-    {.modifier       = KEYBOARD_MODIFIER_LEFTCTRL,
+    {.modifier       = KEYBOARD_MODIFIER_LEFTALT,
      .keys           = {HOTKEY_TOGGLE},
      .key_count      = 1,
      .pass_to_os     = false,
