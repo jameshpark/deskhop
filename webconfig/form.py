@@ -30,6 +30,7 @@ CONFIG_ = [
     FormField(1001, "Mouse", elem="label"),
     FormField(71, "Force Mouse Boot Mode", None, {}, "uint8", "checkbox"),
     FormField(75, "Enable Acceleration", None, {}, "uint8", "checkbox"),
+    FormField(100, "Disable Output Switching via Mouse Movement", None, {}, "uint8", "checkbox"),
     FormField(77, "Jump Treshold", 0, {"min": 0, "max": 1024}, "uint16", "range"),
 
     FormField(1002, "Keyboard", elem="label"),

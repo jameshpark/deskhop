@@ -61,7 +61,7 @@ function packValue(element, key, dataType, buffer) {
   if (dataType in methods) {
     const method = methods[dataType];
     if (element.type === 'checkbox')
-      view.setUint8(dataOffset, element.checked ? 1 : 0, true);
+      view.setUint8(dataOffset, element.checked ? 1 : 0);
     else
       method.call(view, dataOffset, element.value, true);
   }

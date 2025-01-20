@@ -249,6 +249,18 @@ void extract_report_values(uint8_t *raw_report, device_t *state, mouse_values_t 
     values->buttons = get_report_value(raw_report, &iface->mouse.buttons);
 }
 
+mouse_report_t create_relative_mouse_report(device_t *state, mouse_values_t *values) {
+    mouse_report_t mouse_report = {
+        .buttons = values->buttons,
+        .x       = values->move_x,
+        .y       = values->move_y,
+        .wheel   = values->wheel,
+        .pan     = values->pan,
+        .mode    = RELATIVE,
+    };
+    return mouse_report;
+}
+
 mouse_report_t create_mouse_report(device_t *state, mouse_values_t *values) {
     mouse_report_t mouse_report = {
         .buttons = values->buttons,
@@ -276,18 +288,27 @@ void process_mouse_report(uint8_t *raw_report, int len, uint8_t itf, hid_interfa
     /* Interpret the mouse HID report, extract and save values we need. */
     extract_report_values(raw_report, state, &values, iface);
 
-    /* Calculate and update mouse pointer movement. */
-    enum screen_pos_e switch_direction = update_mouse_position(state, &values);
+    if (state->config.disable_mouse_output_switching) {
+        /*
+         * Output switching via mouse is disabled, so simply pass through the (delta-x,delta-y) values
+         * without worrying about screen/desktop/monitor edge detection.
+         */
+        mouse_report_t report = create_relative_mouse_report(state, &values);
+        output_mouse_report(&report, state);
+    } else {
+        /* Calculate and update mouse pointer movement. */
+        enum screen_pos_e switch_direction = update_mouse_position(state, &values);
 
-    /* Create the report for the output PC based on the updated values */
-    mouse_report_t report = create_mouse_report(state, &values);
+        /* Create the report for the output PC based on the updated values */
+        mouse_report_t report = create_mouse_report(state, &values);
 
-    /* Move the mouse, depending where the output is supposed to go */
-    output_mouse_report(&report, state);
+        /* Move the mouse, depending where the output is supposed to go */
+        output_mouse_report(&report, state);
 
-    /* We use the mouse to switch outputs, if switch_direction is LEFT or RIGHT */
-    if (switch_direction != NONE)
-        do_screen_switch(state, switch_direction);
+        /* We use the mouse to switch outputs, if switch_direction is LEFT or RIGHT */
+        if (switch_direction != NONE)
+            do_screen_switch(state, switch_direction);
+    }
 }
 
 /* ==================================================== *

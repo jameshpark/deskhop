@@ -259,6 +259,7 @@ typedef struct {
     uint8_t kbd_led_as_indicator;
     uint8_t hotkey_toggle;
     uint8_t enable_acceleration;
+    uint8_t disable_mouse_output_switching;
 
     uint8_t enforce_ports;
     uint16_t jump_treshold;

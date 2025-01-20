@@ -48,6 +48,7 @@ const config_t default_config = {
     .force_kbd_boot_protocol = ENFORCE_KEYBOARD_BOOT_PROTOCOL,
     .force_mouse_boot_mode = false,
     .enable_acceleration = ENABLE_ACCELERATION,
+    .disable_mouse_output_switching = DISABLE_MOUSE_OUTPUT_SWITCHING,
     .hotkey_toggle = HID_KEY_F24,
     .kbd_led_as_indicator = KBD_LED_AS_INDICATOR,
     .jump_treshold = 0,

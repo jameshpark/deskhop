@@ -70,6 +70,9 @@
 /* Mouse acceleration */
 #define ENABLE_ACCELERATION 1
 
+/* Output switching via mouse  */
+#define DISABLE_MOUSE_OUTPUT_SWITCHING 0
+
 /**================================================== *
  * ==============  Screensaver Config  ============== *
  * ================================================== *

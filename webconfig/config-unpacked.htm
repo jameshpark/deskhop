@@ -1520,6 +1520,30 @@ img {
 
   
   <div class="clearfix">
+    
+<label class="label-inline"> Disable Output Switching via Mouse Movement</label>
+
+    
+<input class="api" type="checkbox" name="name100" data-type="uint8" data-key="100"
+  onchange="valueChangedHandler(this)"
+  />
+
+  </div>
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+  <div class="clearfix">
     <form>
       
 <label class="label-inline"> Jump Treshold=</label>
@@ -1754,7 +1778,7 @@ function packValue(element, key, dataType, buffer) {
   if (dataType in methods) {
     const method = methods[dataType];
     if (element.type === 'checkbox')
-      view.setUint8(dataOffset, element.checked ? 1 : 0, true);
+      view.setUint8(dataOffset, element.checked ? 1 : 0);
     else
       method.call(view, dataOffset, element.value, true);
   }
